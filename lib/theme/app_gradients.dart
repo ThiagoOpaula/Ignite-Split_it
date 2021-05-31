@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 abstract class AppGradients {
@@ -8,7 +7,6 @@ abstract class AppGradients {
 
 class AppGradientsDefault implements AppGradients {
   @override
-  // TODO: implement background
   Gradient get background => LinearGradient(colors: [
         Color(0XFF40B38C),
         Color(0XFF45CC93),

@@ -9,7 +9,7 @@ class SplashPage extends StatelessWidget {
         top: false,
         bottom: false,
         child: Container(
-            decoration: BoxDecoration(color: AppTheme.colors.background),
+            decoration: BoxDecoration(gradient: AppTheme.gradients.background),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
