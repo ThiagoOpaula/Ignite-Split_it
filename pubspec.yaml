@@ -15,6 +15,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
 
+  #Firebase
+  firebase_core: ^1.2.0
+
+  #SocialLogin
+  google_sign_in: ^5.0.4
+
+  #facilitar os testes
+  mocktail: ^0.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
