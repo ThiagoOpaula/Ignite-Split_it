@@ -15,17 +15,10 @@
 
   <div align="center">Split-it is ann app developed in rocketseat course </div>
 
-  
-
-  <div align="center">
-    <img src=https://media.giphy.com/media/fvkpC3AtmtnZ6Sr9Mt/giphy.gif>
-  </div>
-
   ## ⚙️ Instalação dos pacotes
 
 ```
-$ flutter pub get
+$ flutter pub get 
 ```
-
 
 
