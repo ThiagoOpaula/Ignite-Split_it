@@ -1,16 +1,31 @@
-# split_it
+<div>
 
-A new Flutter project.
+  <h1>Clone do C6-bank</h1>
+  <div align="center">
+    <img src=https://img.shields.io/badge/-flutter-blue>
+    <img src=https://img.shields.io/github/stars/ThiagoOpaula/Ignite-Split_it >
+    <img src=https://img.shields.io/github/forks/ThiagoOpaula/Ignite-Split_it >
+    <img src=https://img.shields.io/github/stars/ThiagoOpaula/Ignite-Split_it >
+    <img src=https://img.shields.io/github/license/ThiagoOpaula/Ignite-Split_it >
+  </div>
 
-## Getting Started
+  <h3 align="center">
+  🚧  Flutter App 🚀 Em construção...  🚧
+  </h3>
 
-This project is a starting point for a Flutter application.
+  <div align="center">Split-it is ann app developed in rocketseat course </div>
 
-A few resources to get you started if this is your first Flutter project:
+  
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  <div align="center">
+    <img src=https://media.giphy.com/media/fvkpC3AtmtnZ6Sr9Mt/giphy.gif>
+  </div>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  ## ⚙️ Instalação dos pacotes
+
+```
+$ flutter pub get
+```
+
+
+
