@@ -5,9 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "split_it",
+      "name": "split_it debug",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+    },
+    {
+      "name": "split_it profileMode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
     }
   ]
 }
