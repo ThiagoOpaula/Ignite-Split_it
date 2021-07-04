@@ -5,7 +5,7 @@ import 'package:split_it/shared/models/event_model.dart';
 class HomeRepositoryMock implements HomeRepository {
   @override
   Future<DashboardModel> getDashboard() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     return DashboardModel(send: 100, receive: 50);
   }
 

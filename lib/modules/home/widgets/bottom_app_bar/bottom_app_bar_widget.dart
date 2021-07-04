@@ -15,7 +15,8 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
 
   @override
   void initState() {
-    controller.getDashboard(() {
+    controller.getDashboard();
+    controller.listen((state) {
       setState(() {});
     });
     super.initState();
@@ -26,7 +27,19 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
     switch (controller.state.runtimeType) {
       case AppBarStateLoading:
         {
-          return CircularProgressIndicator();
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InfoCardWidget(
+                value: 0,
+                isLoading: true,
+              ),
+              InfoCardWidget(
+                value: -0,
+                isLoading: true,
+              ),
+            ],
+          );
         }
       case AppBarStateSucess:
         {
@@ -36,9 +49,11 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
             children: [
               InfoCardWidget(
                 value: dashboard.receive,
+                isLoading: false,
               ),
               InfoCardWidget(
                 value: -dashboard.send,
+                isLoading: false,
               ),
             ],
           );

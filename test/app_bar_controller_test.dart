@@ -21,7 +21,7 @@ void main() {
     controller.listen((state) => states.add(state));
     when(repository.getDashboard)
         .thenAnswer((_) async => DashboardModel(send: 100, receive: 50));
-    await controller.getDashboard(() {});
+    await controller.getDashboard();
     expect(states[0], isInstanceOf<AppBarStateLoading>());
     expect(states[1], isInstanceOf<AppBarStateSucess>());
     expect(states.length, 2);
@@ -32,7 +32,7 @@ void main() {
     final states = <AppBarState>[];
     controller.listen((state) => states.add(state));
     when(repository.getDashboard).thenThrow("Deu error");
-    await controller.getDashboard(() {});
+    await controller.getDashboard();
     expect(states[0], isInstanceOf<AppBarStateLoading>());
     expect(states[1], isInstanceOf<AppBarStateFailure>());
     expect((states[1] as AppBarStateFailure).message, "Deu error");
