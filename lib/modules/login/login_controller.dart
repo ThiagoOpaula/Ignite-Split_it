@@ -1,36 +1,27 @@
-import 'package:flutter/foundation.dart';
+import 'package:mobx/mobx.dart';
 import 'package:split_it/modules/login/login_service.dart';
-
 import 'login_state.dart';
 
-class LoginController {
-  LoginState state = LoginStateEmpty();
-  VoidCallback onUpdate;
-  Function(LoginState state)? onChange;
-  final LoginService service;
-  LoginController({required this.onUpdate, required this.service});
+part 'login_controller.g.dart';
 
+class LoginController = _LoginControllerBase with _$LoginController;
+
+abstract class _LoginControllerBase with Store {
+  final LoginService service;
+
+  _LoginControllerBase({required this.service});
+
+  @observable
+  LoginState state = LoginStateEmpty();
+
+  @action
   Future<void> googleSignIn() async {
     try {
-      state = LoginStateLoading();
-      update();
+      state = (LoginStateLoading());
       final user = await service.googleSignIn();
-      state = LoginStateSuccess(user: user);
-      update();
+      state = (LoginStateSuccess(user: user));
     } catch (error) {
       state = LoginStateFailure(message: error.toString());
-      update();
     }
-  }
-
-  void update() {
-    onUpdate();
-    if (onChange != null) {
-      onChange!(state);
-    }
-  }
-
-  void listen(Function(LoginState state) onChange) {
-    this.onChange = onChange;
   }
 }

@@ -16,10 +16,10 @@ dependencies:
   google_fonts: ^2.1.0
 
   #Firebase
-  firebase_core: ^1.2.0
+  firebase_core: ^1.4.0
 
   #SocialLogin
-  google_sign_in: ^5.0.4
+  google_sign_in: ^5.0.5
 
   #facilitar os testes
   mocktail: ^0.1.4
@@ -27,9 +27,16 @@ dependencies:
   #facilitar os loadings
   shimmer: ^2.0.0
 
+  #gerencia de estado
+  mobx: ^2.0.3
+  flutter_mobx: ^2.0.1
+  mobx_codegen: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #gerencia de estado
+  build_runner: ^2.0.6
 
 flutter:
 
