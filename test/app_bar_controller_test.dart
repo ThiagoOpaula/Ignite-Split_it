@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart' as mobx;
 import 'package:mocktail/mocktail.dart';
 import 'package:split_it/modules/home/models/dashboard_model.dart';
 import 'package:split_it/modules/home/repositories/home_repository.dart';
@@ -18,22 +19,27 @@ void main() {
   test("Testando o getDashboard - Sucess", () async {
     expect(controller.state, isInstanceOf<AppBarStateEmpty>());
     final states = <AppBarState>[];
-    controller.listen((state) => states.add(state));
+    mobx.autorun((_) {
+      states.add(controller.state);
+    });
     when(repository.getDashboard)
         .thenAnswer((_) async => DashboardModel(send: 100, receive: 50));
     await controller.getDashboard();
-    expect(states[0], isInstanceOf<AppBarStateLoading>());
-    expect(states[1], isInstanceOf<AppBarStateSucess>());
-    expect(states.length, 2);
+    expect(states[0], isInstanceOf<AppBarStateEmpty>());
+    expect(states[1], isInstanceOf<AppBarStateLoading>());
+    expect(states[2], isInstanceOf<AppBarStateSucess>());
+    expect(states.length, 3);
   });
 
   test("Testando o getDashboard - Failure", () async {
     expect(controller.state, isInstanceOf<AppBarStateEmpty>());
     final states = <AppBarState>[];
-    controller.listen((state) => states.add(state));
+    mobx.autorun((_) {
+      states.add(controller.state);
+    });
     when(repository.getDashboard).thenThrow("Deu error");
     await controller.getDashboard();
-    expect(states[0], isInstanceOf<AppBarStateLoading>());
+    expect(states[0], isInstanceOf<AppBarStateEmpty>());
     expect(states[1], isInstanceOf<AppBarStateFailure>());
     expect((states[1] as AppBarStateFailure).message, "Deu error");
     expect(states.length, 2);

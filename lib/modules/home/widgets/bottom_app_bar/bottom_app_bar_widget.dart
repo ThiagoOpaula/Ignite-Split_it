@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:split_it/modules/home/widgets/app_bar/app_bar_controller.dart';
 import 'package:split_it/modules/home/widgets/app_bar/app_bar_state.dart';
 import 'package:split_it/modules/home/widgets/info_card_widget.dart';
@@ -16,57 +17,56 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
   @override
   void initState() {
     controller.getDashboard();
-    controller.listen((state) {
-      setState(() {});
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    switch (controller.state.runtimeType) {
-      case AppBarStateLoading:
-        {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InfoCardWidget(
-                value: 0,
-                isLoading: true,
-              ),
-              InfoCardWidget(
-                value: -0,
-                isLoading: true,
-              ),
-            ],
-          );
-        }
-      case AppBarStateSucess:
-        {
-          final dashboard = (controller.state as AppBarStateSucess).dashboard;
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InfoCardWidget(
-                value: dashboard.receive,
-                isLoading: false,
-              ),
-              InfoCardWidget(
-                value: -dashboard.send,
-                isLoading: false,
-              ),
-            ],
-          );
-        }
-      case AppBarStateLoading:
-        {
-          final message = (controller.state as AppBarStateFailure).message;
-          return Text(message);
-        }
-      default:
-        {
-          return Container();
-        }
-    }
+    return Observer(builder: (context) {
+      switch (controller.state.runtimeType) {
+        case AppBarStateLoading:
+          {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InfoCardWidget(
+                  value: 0,
+                  isLoading: true,
+                ),
+                InfoCardWidget(
+                  value: -0,
+                  isLoading: true,
+                ),
+              ],
+            );
+          }
+        case AppBarStateSucess:
+          {
+            final dashboard = (controller.state as AppBarStateSucess).dashboard;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InfoCardWidget(
+                  value: dashboard.receive,
+                  isLoading: false,
+                ),
+                InfoCardWidget(
+                  value: -dashboard.send,
+                  isLoading: false,
+                ),
+              ],
+            );
+          }
+        case AppBarStateFailure:
+          {
+            final message = (controller.state as AppBarStateFailure).message;
+            return Text(message);
+          }
+        default:
+          {
+            return Container();
+          }
+      }
+    });
   }
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_controller.dart';
+part of 'app_bar_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,34 +8,34 @@ part of 'login_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$LoginController on _LoginControllerBase, Store {
-  final _$stateAtom = Atom(name: '_LoginControllerBase.state');
+mixin _$AppBarController on _AppBarController, Store {
+  final _$stateAtom = Atom(name: '_AppBarController.state');
 
   @override
-  LoginState get state {
+  AppBarState get state {
     _$stateAtom.reportRead();
     return super.state;
   }
 
   @override
-  set state(LoginState value) {
+  set state(AppBarState value) {
     _$stateAtom.reportWrite(value, super.state, () {
       super.state = value;
     });
   }
 
-  final _$googleSignInAsyncAction =
-      AsyncAction('_LoginControllerBase.googleSignIn');
+  final _$getDashboardAsyncAction =
+      AsyncAction('_AppBarController.getDashboard');
 
   @override
-  Future<void> googleSignIn() {
-    return _$googleSignInAsyncAction.run(() => super.googleSignIn());
+  Future getDashboard() {
+    return _$getDashboardAsyncAction.run(() => super.getDashboard());
   }
 
   @override
   String toString() {
     return '''
-      state: ${state}
+state: ${state}
     ''';
   }
 }

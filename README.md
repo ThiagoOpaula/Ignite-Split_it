@@ -1,11 +1,10 @@
 <div>
 
-  <h1>Clone do C6-bank</h1>
+  <h1>Split it</h1>
   <div align="center">
     <img src=https://img.shields.io/badge/-flutter-blue>
     <img src=https://img.shields.io/github/stars/ThiagoOpaula/Ignite-Split_it >
     <img src=https://img.shields.io/github/forks/ThiagoOpaula/Ignite-Split_it >
-    <img src=https://img.shields.io/github/stars/ThiagoOpaula/Ignite-Split_it >
     <img src=https://img.shields.io/github/license/ThiagoOpaula/Ignite-Split_it >
   </div>
 
