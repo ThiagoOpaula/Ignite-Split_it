@@ -17,11 +17,14 @@ abstract class AppTextStyles {
   TextStyle get stepperIndicatorPrimary;
   TextStyle get stepperIndicatorSecondary;
   TextStyle get stepperNextButton;
+  TextStyle get stepperNextButtonRegular;
   TextStyle get stepperNextButtonDisabled;
   TextStyle get stepperTitle;
   TextStyle get stepperSubtitle;
   TextStyle get hintTextField;
   TextStyle get textField;
+  TextStyle get personTileTitle;
+  TextStyle get personTileTitleSelected;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -147,6 +150,27 @@ class AppTextStylesDefault implements AppTextStyles {
   @override
   TextStyle get textField => GoogleFonts.inter(
         color: AppTheme.colors.textField,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      );
+
+  @override
+  TextStyle get personTileTitle => GoogleFonts.inter(
+        color: AppTheme.colors.button,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+      );
+
+  @override
+  TextStyle get personTileTitleSelected => GoogleFonts.inter(
+        color: AppTheme.colors.personTileTitleSelected,
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      );
+
+  @override
+  TextStyle get stepperNextButtonRegular => GoogleFonts.inter(
+        color: AppTheme.colors.stepperNextButtonRegular,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       );

@@ -13,27 +13,12 @@ class HomeRepositoryMock implements HomeRepository {
   Future<List<EventModel>> getEvents() async {
     await Future.delayed(Duration(seconds: 2));
     return [
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 240, people: 2),
-      EventModel(created: DateTime.now(), title: "bar", value: -100, people: 1),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: -100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: -100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: 100, people: 2),
-      EventModel(
-          created: DateTime.now(), title: "Churrasco", value: -100, people: 2),
+      EventModel(created: DateTime.now(), name: "Churrasco", value: 240),
+      EventModel(created: DateTime.now(), name: "bar", value: -100),
+      EventModel(created: DateTime.now(), name: "Churrasco", value: 100),
+      EventModel(created: DateTime.now(), name: "Churrasco", value: 100),
+      EventModel(created: DateTime.now(), name: "Churrasco", value: -100),
+      EventModel(created: DateTime.now(), name: "Churrasco", value: 100),
     ];
   }
 }

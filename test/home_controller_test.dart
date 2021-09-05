@@ -22,10 +22,8 @@ void main() {
     mobx.autorun((_) {
       states.add(controller.state);
     });
-    when(repository.getEvents).thenAnswer((_) async => [
-          EventModel(
-              title: "title", created: DateTime.now(), value: 100, people: 1)
-        ]);
+    when(repository.getEvents).thenAnswer((_) async =>
+        [EventModel(name: "title", created: DateTime.now(), value: 100)]);
     await controller.getEvents();
     expect(states[0], isInstanceOf<HomeStateEmpty>());
     expect(states[1], isInstanceOf<HomeStateLoading>());
