@@ -33,7 +33,7 @@ class FirebaseRepository {
   Future<List<Map<String, dynamic>>> get(String collection) async {
     try {
       final response = await this.firestore.collection(collection).get();
-      return response.docs.map((e) => e.data()).toList();
+      return response.docs.map((e) => e.data()..addAll({"id": e.id})).toList();
     } catch (e) {
       throw e;
     }
@@ -41,7 +41,14 @@ class FirebaseRepository {
 
   update() {}
 
-  delete() {}
+  Future<bool> delete({required String id, required String collection}) async {
+    try {
+      await this.firestore.collection(collection).doc(id).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   firstwhere() {}
 }

@@ -25,6 +25,12 @@ class _StepTwoPageState extends State<StepTwoPage> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

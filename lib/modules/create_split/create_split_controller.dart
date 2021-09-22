@@ -4,6 +4,9 @@ import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/models/item_model.dart';
 import 'package:split_it/shared/repositories/firebase_repository.dart';
 
+import 'package:split_it/modules/create_split/create_split_status.dart';
+export 'package:split_it/modules/create_split/create_split_status.dart';
+
 part 'create_split_controller.g.dart';
 
 class CreateSplitController = _CreateSplitController
@@ -18,7 +21,7 @@ abstract class _CreateSplitController with Store {
 
   @action
   void nextPage() {
-    if (currentPage < 3) {
+    if (currentPage < 2) {
       currentPage++;
     }
   }
@@ -52,17 +55,17 @@ abstract class _CreateSplitController with Store {
   }
 
   @observable
-  String status = "empty";
+  CreateSplitStatus status = CreateSplitStatus.empty;
 
   @action
   Future<void> saveEvent() async {
     try {
-      status = "loading";
-      final response = await repository.create(event);
-      status = "sucess";
+      status = CreateSplitStatus.loading;
+      await repository.create(event);
+      status = CreateSplitStatus.success;
       nextPage();
     } catch (e) {
-      status = "error";
+      status = CreateSplitStatus.error;
     }
   }
 }

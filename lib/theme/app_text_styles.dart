@@ -7,6 +7,7 @@ abstract class AppTextStyles {
   TextStyle get title;
   TextStyle get button;
   TextStyle get appBar;
+  TextStyle get appBarEventDetails;
   TextStyle get infoCardTitle;
   TextStyle get infoCardSubtitle1;
   TextStyle get infoCardSubtitle2;
@@ -25,6 +26,7 @@ abstract class AppTextStyles {
   TextStyle get textField;
   TextStyle get personTileTitle;
   TextStyle get personTileTitleSelected;
+  TextStyle get eventDetailTitle;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -173,5 +175,19 @@ class AppTextStylesDefault implements AppTextStyles {
         color: AppTheme.colors.stepperNextButtonRegular,
         fontSize: 16,
         fontWeight: FontWeight.w500,
+      );
+
+  @override
+  TextStyle get appBarEventDetails => GoogleFonts.montserrat(
+        color: AppTheme.colors.eventTileTitle,
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+      );
+
+  @override
+  TextStyle get eventDetailTitle => GoogleFonts.roboto(
+        color: AppTheme.colors.stepperIndicatorSecondary,
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
       );
 }

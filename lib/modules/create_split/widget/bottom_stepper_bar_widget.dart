@@ -5,11 +5,9 @@ import 'package:split_it/modules/create_split/widget/stepper_next_button_widget.
 import 'package:split_it/theme/app_theme.dart';
 
 class BottomStepperBarWidget extends StatelessWidget {
-  final VoidCallback onTapCancel;
   final CreateSplitController controller;
   const BottomStepperBarWidget({
     Key? key,
-    required this.onTapCancel,
     required this.controller,
   }) : super(key: key);
 
@@ -24,17 +22,23 @@ class BottomStepperBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 61,
       child: Column(
         children: [
+          Container(
+            color: AppTheme.colors.divider,
+            width: double.maxFinite,
+            height: 1,
+          ),
           Row(
             children: [
               Observer(
                 builder: (_) => StepperNextNuttonWidget(
-                  label: 'Cancelar',
-                  enabled: controller.enableNavigateButton,
-                  onTap: controller.enableNavigateButton ? onTapCancel : null,
-                ),
+                    label: 'Cancelar',
+                    enabled: controller.enableNavigateButton,
+                    onTap: () {
+                      Navigator.pop(context);
+                    }),
               ),
               Container(
                 width: 1,
@@ -43,10 +47,12 @@ class BottomStepperBarWidget extends StatelessWidget {
               ),
               Observer(
                 builder: (_) => StepperNextNuttonWidget(
-                    label:
-                        controller.currentPage == 2 ? "Finalizar" : 'Continuar',
-                    enabled: controller.enableNavigateButton,
-                    onTap: onTapNext),
+                  label:
+                      controller.currentPage == 2 ? "Finalizar" : 'Continuar',
+                  colored: controller.currentPage == 2,
+                  enabled: controller.enableNavigateButton,
+                  onTap: onTapNext,
+                ),
               ),
             ],
           ),

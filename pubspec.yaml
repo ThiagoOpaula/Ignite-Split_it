@@ -16,7 +16,7 @@ dependencies:
   google_fonts: ^2.1.0
 
   #Firebase
-  firebase_core: ^1.4.0
+  firebase_core: ^1.6.0
   cloud_firestore: ^2.5.0
 
   #SocialLogin
@@ -35,6 +35,12 @@ dependencies:
 
   #mascara de texto
   flutter_masked_text2: ^0.9.1
+
+  #tratamento de erro e loading
+  bot_toast: ^4.0.1
+
+  #Localization
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

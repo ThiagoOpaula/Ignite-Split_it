@@ -8,12 +8,15 @@ import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/models/item_model.dart';
 
 class EventModel extends BaseModel {
+  final String id;
   final String name;
   final DateTime? created;
   final double value;
+  final double paid;
   final List<ItemModel> items;
   final List<FriendModel> friends;
   double get valueSplit => (calcValue / friends.length);
+  double get remainingValue => value - paid;
   int get people => friends.length;
   double get calcValue => items.isNotEmpty
       ? items
@@ -25,7 +28,9 @@ class EventModel extends BaseModel {
   EventModel({
     this.name = "",
     this.created,
+    this.id = "",
     this.value = 0,
+    this.paid = 0,
     this.items = const [],
     this.friends = const [],
   }) : super(collection: "/events");
@@ -34,16 +39,17 @@ class EventModel extends BaseModel {
     String? name,
     DateTime? created,
     double? value,
+    double? paid,
     List<ItemModel>? items,
     List<FriendModel>? friends,
   }) {
     return EventModel(
-      name: name ?? this.name,
-      created: created ?? this.created,
-      value: value == 0.0 ? calcValue : this.value,
-      items: items ?? this.items,
-      friends: friends ?? this.friends,
-    );
+        name: name ?? this.name,
+        created: created ?? this.created,
+        value: value == 0.0 ? calcValue : this.value,
+        items: items ?? this.items,
+        friends: friends ?? this.friends,
+        paid: paid ?? this.paid);
   }
 
   @override
@@ -52,6 +58,7 @@ class EventModel extends BaseModel {
       'name': name,
       'created': FieldValue.serverTimestamp(),
       'value': calcValue,
+      'paid': "paid",
       'items': items.map((x) => x.toMap()).toList(),
       'friends': friends.map((x) => x.toMap()).toList(),
     };
@@ -59,9 +66,11 @@ class EventModel extends BaseModel {
 
   factory EventModel.fromMap(Map<String, dynamic> map) {
     return EventModel(
+      id: map['id'],
       name: map['name'],
       created: (map['created'] as Timestamp).toDate(),
       value: map['value'],
+      paid: map['paid'] ?? 0.0,
       items:
           List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x))),
       friends: List<FriendModel>.from(

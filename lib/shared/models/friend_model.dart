@@ -11,18 +11,18 @@ class FriendModel {
 
   FriendModel copyWith({
     String? name,
-    String? phoroURL,
+    String? photoURL,
   }) {
     return FriendModel(
       name: name ?? this.name,
-      photoURL: phoroURL ?? this.photoURL,
+      photoURL: photoURL ?? this.photoURL,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'phoroURL': photoURL,
+      'photoURL': photoURL,
     };
   }
 
@@ -40,7 +40,7 @@ class FriendModel {
       FriendModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'FriendModel(name: $name, phoroURL: $photoURL)';
+  String toString() => 'FriendModel(name: $name, photoURL: $photoURL)';
 
   @override
   bool operator ==(Object other) {

@@ -9,8 +9,9 @@ class StepTwoController = _StepTwoControllerBase with _$StepTwoController;
 abstract class _StepTwoControllerBase with Store {
   final CreateSplitController controller;
   final repository = FirebaseRepository();
+  late ReactionDisposer _disposer;
   _StepTwoControllerBase({required this.controller}) {
-    autorun((_) {
+    _disposer = autorun((_) {
       controller.onChanged(friends: _selectedFriends);
     });
   }
@@ -71,5 +72,9 @@ abstract class _StepTwoControllerBase with Store {
   Future<void> getFriends() async {
     final response = await this.repository.get("/friends");
     _friends = response.map((e) => FriendModel.fromMap(e)).toList();
+  }
+
+  void dispose() {
+    _disposer();
   }
 }
