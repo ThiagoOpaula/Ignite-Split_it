@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:split_it/modules/event_details/event_details_page.dart';
 import 'package:split_it/modules/home/widgets/icon_dollar_widget.dart';
 import 'package:split_it/modules/home/widgets/loading_widget.dart';
 import 'package:split_it/shared/models/event_model.dart';
@@ -8,9 +7,11 @@ import 'package:split_it/theme/app_theme.dart';
 
 class EventTileWidget extends StatelessWidget {
   final EventModel model;
+  final VoidCallback? onTap;
   final bool isLoading;
 
-  const EventTileWidget({Key? key, required this.model, this.isLoading = false})
+  const EventTileWidget(
+      {Key? key, required this.model, this.isLoading = false, this.onTap})
       : super(key: key);
 
   IconDollarType get type =>
@@ -54,14 +55,7 @@ class EventTileWidget extends StatelessWidget {
       );
     }
     return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => EventDetailsPage(
-                      event: model,
-                    )));
-      },
+      onTap: onTap,
       child: Row(
         children: [
           IconDollarWidget(type: type),

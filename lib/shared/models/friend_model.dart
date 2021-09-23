@@ -3,19 +3,23 @@ import 'dart:convert';
 class FriendModel {
   final String name;
   final String photoURL;
+  final bool isPaid;
 
   FriendModel({
     required this.name,
     required this.photoURL,
+    this.isPaid = false,
   });
 
   FriendModel copyWith({
     String? name,
     String? photoURL,
+    bool? isPaid,
   }) {
     return FriendModel(
       name: name ?? this.name,
       photoURL: photoURL ?? this.photoURL,
+      isPaid: isPaid ?? this.isPaid,
     );
   }
 
@@ -23,11 +27,13 @@ class FriendModel {
     return {
       'name': name,
       'photoURL': photoURL,
+      'isPaid': isPaid,
     };
   }
 
   factory FriendModel.fromMap(Map<String, dynamic> map) {
     return FriendModel(
+      isPaid: map['isPaid'] ?? false,
       name: map['name'],
       photoURL: map['photoURL'] ??
           "https://www.pngitem.com/pimgs/m/404-4042686_my-profile-person-icon-png-free-transparent-png.png",

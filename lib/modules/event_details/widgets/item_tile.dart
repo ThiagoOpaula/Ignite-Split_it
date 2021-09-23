@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:split_it/shared/models/item_model.dart';
 import 'package:split_it/shared/utils/formatters.dart';
 import 'package:split_it/theme/app_theme.dart';
 

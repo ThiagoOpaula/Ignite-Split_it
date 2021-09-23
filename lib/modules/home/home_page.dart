@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:split_it/modules/event_details/event_details_page.dart';
 import 'package:split_it/modules/home/home_controller.dart';
 import 'package:split_it/modules/home/home_state.dart';
 import 'package:split_it/modules/home/repositories/home_repository_firebase.dart';
@@ -33,8 +34,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: AppTheme.colors.backgroundPrimary,
       appBar: AppBarWidget(
         user: user,
-        onTapAddButton: () {
-          Navigator.pushNamed(context, "/create_split");
+        onTapAddButton: () async {
+          await Navigator.pushNamed(context, "/create_split");
+          controller.getEvents();
         },
       ),
       body: Padding(
@@ -55,7 +57,20 @@ class _HomePageState extends State<HomePage> {
                     children: (controller.state as HomeStateSucess)
                         .events
                         .map(
-                          (e) => EventTileWidget(model: e),
+                          (e) => EventTileWidget(
+                            model: e,
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => EventDetailsPage(
+                                    event: e,
+                                  ),
+                                ),
+                              );
+                              controller.getEvents();
+                            },
+                          ),
                         )
                         .toList(),
                   );

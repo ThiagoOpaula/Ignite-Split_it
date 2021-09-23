@@ -1,5 +1,8 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 import 'package:split_it/modules/event_details/event_details_controller.dart';
+import 'package:split_it/modules/event_details/event_details_status.dart';
 import 'package:split_it/modules/event_details/widgets/item_tile.dart';
 import 'package:split_it/modules/event_details/widgets/person_tile.dart';
 import 'package:split_it/shared/models/event_model.dart';
@@ -19,6 +22,31 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   final controller = EventDetailsController(
     repository: FirebaseRepository(),
   );
+  late ReactionDisposer _disposer;
+  late EventModel event;
+
+  @override
+  void initState() {
+    event = widget.event;
+    _disposer = autorun((_) {
+      if (controller.status.runtimeType == EventDetailsStatusSucess) {
+        BotToast.closeAllLoading();
+        Navigator.pop(context);
+      } else if (controller.status.runtimeType == EventDetailsStatusLoading) {
+        BotToast.showLoading();
+      } else if (controller.status.runtimeType == EventDetailsStatusFailure) {
+        BotToast.closeAllLoading();
+        BotToast.showText(text: "Não foi possível deletar o evento");
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _disposer();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +55,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         elevation: 0,
         backgroundColor: AppTheme.colors.backgroundPrimary,
         title: Text(
-          widget.event.name,
+          event.name,
           style: AppTheme.textStyles.appBarEventDetails,
         ),
         centerTitle: true,
@@ -37,7 +65,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         actions: [
           IconButton(
               onPressed: () {
-                controller.delete(widget.event.id);
+                controller.delete(event.id);
               },
               icon: Icon(
                 Icons.delete,
@@ -65,11 +93,16 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                       children: [
                         Text("INTEGRANTES",
                             style: AppTheme.textStyles.eventDetailTitle),
-                        ...widget.event.friends
+                        ...event.friends
                             .map((e) => PersonTileWidget(
-                                  onPressed: () {},
-                                  friend: e,
-                                  value: widget.event.valueSplit,
+                                  key: UniqueKey(),
+                                  event: event,
+                                  model: e,
+                                  value: event.valueSplit,
+                                  onChanged: (newEvent) {
+                                    event = newEvent;
+                                    setState(() {});
+                                  },
                                 ))
                             .toList()
                       ],
@@ -100,7 +133,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                         indent: 0,
                         height: 1,
                       ),
-                      ...widget.event.items
+                      ...event.items
                           .map((e) => ItemTileWidget(
                                 name: e.name,
                                 value: e.value,
@@ -117,7 +150,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: ItemTileWidget(
                   name: "total",
-                  value: widget.event.value,
+                  value: event.value,
                   hasDivider: false,
                 ),
               ),
@@ -129,7 +162,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "Faltam ${widget.event.remainingValue.reais()}",
+                    "Faltam ${event.remainingValue.reais()}",
                     style: AppTheme.textStyles.eventDetailTitle
                         .copyWith(color: Color(0XFFE83F5B)),
                   )

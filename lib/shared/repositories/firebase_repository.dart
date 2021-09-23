@@ -39,7 +39,18 @@ class FirebaseRepository {
     }
   }
 
-  update() {}
+  Future<bool> update(
+      {required String id,
+      required String collection,
+      required BaseModel model}) async {
+    try {
+      await this.firestore.collection(collection).doc(id).update(model.toMap());
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 
   Future<bool> delete({required String id, required String collection}) async {
     try {

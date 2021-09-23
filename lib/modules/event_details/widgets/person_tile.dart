@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:split_it/modules/event_details/widgets/check_rounded_button.dart';
+import 'package:split_it/modules/event_details/widgets/check_rouded_button/check_rounded_button.dart';
+import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/utils/formatters.dart';
 
 class PersonTileWidget extends StatelessWidget {
-  final bool isPaid;
-  final VoidCallback onPressed;
+  final FriendModel model;
   final double value;
-  final FriendModel friend;
+  final Function(EventModel newFriend) onChanged;
+  final EventModel event;
   const PersonTileWidget(
       {Key? key,
-      this.isPaid = false,
-      required this.onPressed,
-      required this.friend,
-      required this.value})
+      required this.onChanged,
+      required this.model,
+      required this.value,
+      required this.event})
       : super(key: key);
 
   @override
@@ -26,16 +27,16 @@ class PersonTileWidget extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            image: friend.photoURL.isNotEmpty
+            image: model.photoURL.isNotEmpty
                 ? DecorationImage(
-                    image: NetworkImage(friend.photoURL),
+                    image: NetworkImage(model.photoURL),
                     fit: BoxFit.cover,
                   )
                 : null),
-        child: friend.photoURL.isEmpty ? Text(friend.name[0]) : Container(),
+        child: model.photoURL.isEmpty ? Text(model.name[0]) : Container(),
       ),
       title: Text(
-        friend.name,
+        model.name,
         style: GoogleFonts.roboto(
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -46,11 +47,12 @@ class PersonTileWidget extends StatelessWidget {
         style: GoogleFonts.roboto(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: isPaid ? Color(0xFF40B28C) : Color(0XFF666666)),
+            color: model.isPaid ? Color(0xFF40B28C) : Color(0XFFE83F5B)),
       ),
       trailing: CheckRoundedButton(
-        isClicked: isPaid,
-        onPressed: onPressed,
+        event: event,
+        friend: model,
+        onChanged: onChanged,
       ),
     );
   }

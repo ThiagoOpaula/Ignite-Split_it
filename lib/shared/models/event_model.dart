@@ -69,8 +69,8 @@ class EventModel extends BaseModel {
       id: map['id'],
       name: map['name'],
       created: (map['created'] as Timestamp).toDate(),
-      value: map['value'],
-      paid: map['paid'] ?? 0.0,
+      value: double.tryParse(map['value'].toString()) ?? 0.0,
+      paid: double.tryParse(map['paid'].toString()) ?? 0.0,
       items:
           List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x))),
       friends: List<FriendModel>.from(
